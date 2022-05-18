@@ -3,7 +3,44 @@ package main
 import "fmt"
 
 func main() {
+	type Matrix [][]int
+	var n, m, l int
+	fmt.Scanf("%d %d %d", &n, &m, &l)
 
+	a := make([][]int, n)
+	b := make([][]int, m)
+	// 行列を用意
+	for i := 0; i < n; i++ {
+		a[i] = make([]int, m)
+	}
+	for i := 0; i < m; i++ {
+		b[i] = make([]int, l)
+	}
+
+	// 要素に値を挿入
+	for i := 0; i < n; i++ {
+		for j := 0; j < m; j++ {
+			fmt.Scanf("%d", &a[i][j])
+		}
+	}
+	for j := 0; j < m; j++ {
+		for k := 0; k < l; k++ {
+			fmt.Scanf("%d", &b[j][k])
+		}
+	}
+	// ここが O(n^3) になってる
+	c := make(Matrix, n)
+	for i := 0; i < n; i++ {
+		c[i] = make([]int, l)
+		for j := 0; j < l; j++ {
+			for k := 0; k < m; k++ {
+				c[i][j] += a[i][k] * b[k][j]
+
+			}
+			fmt.Printf("%d ", c[i][j])
+		}
+		fmt.Println()
+	}
 }
 
 // 1_6_D
@@ -141,4 +178,30 @@ func spreadSheet() {
 		cnt += colCnt
 	}
 	fmt.Println(cnt)
+}
+
+// 1_7_d
+func matrixMaltiplication() {
+	var n, m, l int
+	fmt.Scanf("%d %d %d", &n, &m, &l)
+
+	a := make([][]int, n)
+	b := make([][]int, m)
+	for i := 0; i < n; i++ {
+		a[i] = make([]int, m)
+	}
+	for i := 0; i < m; i++ {
+		a[i] = make([]int, l)
+	}
+	for i := 0; i < n; i++ {
+		for j := 0; j < m; j++ {
+			fmt.Scanf("%d", &a[i][j])
+			for k := 0; k < l; k++ {
+				fmt.Scanf("%d", &b[j][k])
+			}
+		}
+	}
+
+	fmt.Printf("%+v", a)
+	fmt.Printf("%+v", b)
 }
