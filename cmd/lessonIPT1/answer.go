@@ -3,6 +3,7 @@ package lesson2
 import (
 	"bufio"
 	"fmt"
+	"io"
 	"os"
 	"strings"
 	"unicode"
@@ -222,5 +223,32 @@ func sumOfNumbers() {
 			sum += int(ch - '0')
 		}
 		fmt.Println(sum)
+	}
+}
+
+// 1_8_C
+func countingCharacters() {
+	//scanner := bufio.NewScanner(os.Stdin)
+	scanner := bufio.NewReader(os.Stdin)
+	alpha := make([]int, 26)
+	for {
+		//scanner.Scan()
+		//str := scanner.Text()
+		//if scanner.Err() == io.EOF {
+		//	break
+		//}
+		str, err := scanner.ReadString('\n')
+		if err == io.EOF {
+			break
+		}
+		for _, c := range str {
+			tmp := strings.ToLower(string(c))
+			if tmp[0] >= 'a' && tmp[0] <= 'z' {
+				alpha[tmp[0]-'a']++
+			}
+		}
+	}
+	for i := 0; i < len(alpha); i++ {
+		fmt.Printf("%s : %d\n", string('a'+i), alpha[i])
 	}
 }
