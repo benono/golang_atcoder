@@ -204,3 +204,23 @@ func togglingCases() {
 	}
 	fmt.Println()
 }
+
+// 1_8_B
+// runeの扱い方を学んだ
+func sumOfNumbers() {
+	var sc = bufio.NewScanner(os.Stdin)
+	for {
+		var str string
+		sc.Scan()
+		str = sc.Text()
+		if str == "0" {
+			break
+		}
+
+		var sum int
+		for _, ch := range str {
+			sum += int(ch - '0')
+		}
+		fmt.Println(sum)
+	}
+}
